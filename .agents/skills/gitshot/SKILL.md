@@ -78,6 +78,36 @@ BODY=$(npx gitshot bug.png)
 gh issue create --title "UI Bug: Button misaligned" --body "$BODY"
 ```
 
+## Handling pasted images
+
+If the user pastes an image instead of providing a file path:
+
+1. Assume the image has been saved automatically by VS Code/Copilot in the local workspace cache.
+
+2. Search for the most recently modified image file in common VS Code storage locations:
+
+- Linux:
+  ~/.config/Code/User/workspaceStorage/
+  ~/.config/Code/Service Worker/CacheStorage/
+
+- macOS:
+  ~/Library/Application Support/Code/User/workspaceStorage/
+  ~/Library/Application Support/Code/Service Worker/CacheStorage/
+
+- Windows:
+  %APPDATA%\Code\User\workspaceStorage\
+
+3. Select the newest file with extension:
+   .png, .jpg, .jpeg, .webp
+
+4. Use that file as input to gitshot.
+
+5. Then proceed normally:
+
+```bash
+npx gitshot "<resolved-image-path>" | gh issue create --title "<title>" --body-file -
+
+
 ## Important Notes
 
 - stdout contains ONLY the URL or markdown (pipe-safe)
@@ -86,3 +116,5 @@ gh issue create --title "UI Bug: Button misaligned" --body "$BODY"
 - Supported formats: PNG, JPG, JPEG, GIF, SVG, WebP, BMP, ICO, TIFF, AVIF
 - First run with release backend auto-creates `<user>/gitshot-images` repo (one-time)
 - **Privacy:** The release backend uploads to a PUBLIC repo. Do not upload sensitive images (credentials, internal dashboards). Use Cloudinary or imgbb for sensitive content.
+
+
