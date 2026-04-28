@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "gitshot": {
+      "source": "vipulgupta2048/gitshot",
+      "sourceType": "github",
+      "skillPath": "skills/gitshot/SKILL.md",
+      "computedHash": "05b3efcc153c8d752eff617cd2e3e9b4f755a5ceda0e500e54f2f60aebae6f9f"
+    }
+  }
+}
